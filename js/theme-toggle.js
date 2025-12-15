@@ -1,11 +1,12 @@
 /**
  * Theme Toggle Functionality
  * Handles dark/light mode switching with localStorage persistence
+ * Updated for Tailwind CSS v4 dark mode (class on html element)
  */
 
 (function() {
   const STORAGE_KEY = 'portfolio-theme';
-  const LIGHT_THEME_CLASS = 'light-theme';
+  const DARK_CLASS = 'dark';
   
   // Get stored theme or check system preference
   function getPreferredTheme() {
@@ -14,7 +15,7 @@
       return storedTheme;
     }
     
-    // Check system preference
+    // Check system preference - default to dark if prefers dark or no preference
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
       return 'light';
     }
@@ -24,17 +25,17 @@
   
   // Apply theme to document
   function applyTheme(theme) {
-    if (theme === 'light') {
-      document.body.classList.add(LIGHT_THEME_CLASS);
+    if (theme === 'dark') {
+      document.documentElement.classList.add(DARK_CLASS);
     } else {
-      document.body.classList.remove(LIGHT_THEME_CLASS);
+      document.documentElement.classList.remove(DARK_CLASS);
     }
   }
   
   // Toggle theme
   function toggleTheme() {
-    const isLight = document.body.classList.contains(LIGHT_THEME_CLASS);
-    const newTheme = isLight ? 'dark' : 'light';
+    const isDark = document.documentElement.classList.contains(DARK_CLASS);
+    const newTheme = isDark ? 'light' : 'dark';
     
     applyTheme(newTheme);
     localStorage.setItem(STORAGE_KEY, newTheme);
@@ -46,14 +47,14 @@
   // Update Vanta.js background based on theme
   function updateVantaBackground(theme) {
     if (window.vantaEffect) {
-      const colors = theme === 'light' 
+      const colors = theme === 'dark' 
         ? { 
-            color: 0x7c3aed,
-            backgroundColor: 0xf0f4f8 
-          }
-        : { 
             color: 0x00d4ff,
             backgroundColor: 0x0a0a0f 
+          }
+        : { 
+            color: 0x7c3aed,
+            backgroundColor: 0xf0f4f8 
           };
       
       window.vantaEffect.setOptions(colors);
@@ -76,8 +77,14 @@
   // Setup toggle button event listener
   function setupToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
+    const toggleBtnMobile = document.getElementById('theme-toggle-mobile');
+    
     if (toggleBtn) {
       toggleBtn.addEventListener('click', toggleTheme);
+    }
+    
+    if (toggleBtnMobile) {
+      toggleBtnMobile.addEventListener('click', toggleTheme);
     }
     
     // Listen for system theme changes
