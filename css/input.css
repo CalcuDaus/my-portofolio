@@ -903,3 +903,152 @@
 [data-aos].aos-animate {
   pointer-events: auto;
 }
+
+/* ==========================================
+   SKELETON LOADING SYSTEM
+   ========================================== */
+
+/* Base skeleton class */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-glass);
+  border-radius: 0.5rem;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+:root:not(.dark) .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.05),
+    transparent
+  );
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Skeleton variants */
+.skeleton-text {
+  @apply h-4 rounded;
+}
+
+.skeleton-text-sm {
+  @apply h-3 rounded;
+}
+
+.skeleton-text-lg {
+  @apply h-6 rounded;
+}
+
+.skeleton-title {
+  @apply h-8 rounded w-3/4;
+}
+
+.skeleton-avatar {
+  @apply rounded-full;
+}
+
+.skeleton-card {
+  @apply min-h-[180px] rounded-xl;
+}
+
+.skeleton-image {
+  @apply w-full h-full rounded-xl;
+}
+
+.skeleton-button {
+  @apply h-12 rounded-xl w-32;
+}
+
+.skeleton-icon {
+  @apply w-12 h-12 rounded-xl;
+}
+
+/* Image with skeleton loading */
+.lazy-image-container {
+  @apply relative overflow-hidden;
+}
+
+.lazy-image-container .skeleton-placeholder {
+  @apply absolute inset-0 z-10;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-image-container img.loaded + .skeleton-placeholder,
+.lazy-image-container .skeleton-placeholder.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Lazy loaded images */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Content skeleton wrapper - shows skeleton until content loads */
+.content-loading {
+  @apply relative;
+}
+
+.content-loading .skeleton-overlay {
+  @apply absolute inset-0 z-10 flex flex-col gap-4 p-6;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  transition: opacity 0.4s ease;
+}
+
+.content-loading.loaded .skeleton-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Page loading state */
+body.loading .bento-item {
+  visibility: hidden;
+}
+
+body.loading .bento-item::before {
+  content: '';
+  visibility: visible;
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-glass);
+  border-radius: var(--radius-card);
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+/* Skeleton for specific components */
+.skeleton-profile {
+  @apply flex flex-col items-center gap-4 p-8;
+}
+
+.skeleton-tech-icon {
+  @apply w-12 h-12 rounded-lg;
+}
+
+.skeleton-project-image {
+  @apply absolute inset-0 rounded-xl;
+}
