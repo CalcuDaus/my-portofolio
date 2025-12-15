@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Firdaus | Full Stack Developer</title>
+  <meta name="description" content="Portfolio Muhammad Firdaus - Tech Enthusiast & Full Stack Developer. Laravel, PHP, JavaScript specialist.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#00d4ff',
+            secondary: '#7c3aed',
+            dark: '#0a0a0f',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/input.css">
+  
+  <!-- AOS - Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+  <!-- Background Canvas for Three.js/Vanta -->
+  <div id="bg-canvas"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="#" class="text-xl font-bold gradient-text">Firdaus.dev</a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#calculator" class="nav-link">The Lab</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="md:hidden p-2 text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="mobile-menu">
+        <a href="#about" class="nav-link py-3">About</a>
+        <a href="#calculator" class="nav-link py-3">The Lab</a>
+        <a href="#projects" class="nav-link py-3">Projects</a>
+        <a href="#contact" class="nav-link py-3">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="hero" class="min-h-screen flex items-center justify-center relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div data-aos="fade-up" data-aos-duration="1000">
+        <div class="mb-6">
+          <img src="https://avatars.githubusercontent.com/u/118119190?v=4" alt="Muhammad Firdaus" class="w-32 h-32 rounded-full mx-auto border-4 border-primary/30 shadow-lg shadow-primary/20">
+        </div>
+        <p class="text-primary font-medium mb-4">👋 Halo, saya</p>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+          <span class="gradient-text">Muhammad Firdaus</span>
+        </h1>
+        <p class="text-2xl text-white font-semibold mb-4">Full Stack Developer</p>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+          Tech Enthusiast dengan passion membangun aplikasi web modern.<br>
+          Spesialisasi dalam Laravel, PHP, dan JavaScript.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#projects" class="btn-primary">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            Lihat Karya
+          </a>
+          <a href="#calculator" class="btn-secondary">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+            Coba Tools
+          </a>
+        </div>
+      </div>
+      
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2" data-aos="fade-up" data-aos-delay="500">
+        <div class="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
+          <div class="w-1 h-3 bg-primary rounded-full mt-2 animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About & Tech Stack Section -->
+  <section id="about" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="section-title gradient-text">Tech Stack</h2>
+        <p class="section-subtitle mx-auto">
+          Teknologi yang saya gunakan untuk membangun solusi digital yang powerful
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" data-aos="fade-up" data-aos-delay="200">
+        <!-- Tech Cards -->
+        <div class="glass-card tech-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
+          <span class="text-sm font-medium">Laravel</span>
+        </div>
+        <div class="glass-card tech-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+          <span class="text-sm font-medium">PHP</span>
+        </div>
+        <div class="glass-card tech-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+          <span class="text-sm font-medium">JavaScript</span>
+        </div>
+        <div class="glass-card tech-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS">
+          <span class="text-sm font-medium">Tailwind</span>
+        </div>
+        <div class="glass-card tech-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+          <span class="text-sm font-medium">HTML5</span>
+        </div>
+        <div class="glass-card tech-card">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+          <span class="text-sm font-medium">MySQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Lab / Calculator Section -->
+  <section id="calculator" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="section-title gradient-text">The Lab</h2>
+        <p class="section-subtitle mx-auto">
+          Financial Tools untuk membantu perencanaan keuangan Anda
+        </p>
+      </div>
+      
+      <!-- Tab Navigation -->
+      <div class="max-w-md mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="pph21">PPh 21</button>
+          <button class="tab-btn" data-tab="kpr">KPR</button>
+          <button class="tab-btn" data-tab="freelance">Freelance</button>
+        </div>
+      </div>
+      
+      <!-- Calculator Container -->
+      <div class="glass-card glow-border p-6 md:p-8" data-aos="fade-up" data-aos-delay="200">
+        
+        <!-- PPh 21 Calculator -->
+        <div id="pph21-content" class="tab-content active">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Form -->
+            <div>
+              <h3 class="text-xl font-semibold mb-6">Kalkulator PPh 21</h3>
+              <div class="form-group">
+                <label class="form-label">Penghasilan Bruto per Tahun (Rp)</label>
+                <input type="number" id="pph-gross" class="form-input" placeholder="Contoh: 120000000">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Status PTKP</label>
+                <select id="pph-ptkp" class="form-input">
+                  <option value="54000000">TK/0 - Rp 54.000.000</option>
+                  <option value="58500000">K/0 - Rp 58.500.000</option>
+                  <option value="63000000">K/1 - Rp 63.000.000</option>
+                  <option value="67500000">K/2 - Rp 67.500.000</option>
+                  <option value="72000000">K/3 - Rp 72.000.000</option>
+                </select>
+              </div>
+              <button id="calc-pph" class="btn-primary w-full mt-4">
+                Hitung PPh 21
+              </button>
+            </div>
+            <!-- Result -->
+            <div id="pph-result" class="glass-card result-card">
+              <div class="mb-6">
+                <p class="result-label">PPh 21 per Tahun</p>
+                <p id="pph-yearly" class="result-value gradient-text">Rp 0</p>
+              </div>
+              <div>
+                <p class="result-label">PPh 21 per Bulan</p>
+                <p id="pph-monthly" class="text-2xl font-bold text-primary">Rp 0</p>
+              </div>
+              <div class="chart-container">
+                <canvas id="pph-chart"></canvas>
+              </div>
+              <button id="export-pph" class="btn-secondary w-full mt-6">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Simpan (PNG)
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- KPR Calculator -->
+        <div id="kpr-content" class="tab-content">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Form -->
+            <div>
+              <h3 class="text-xl font-semibold mb-6">Kalkulator KPR</h3>
+              <div class="form-group">
+                <label class="form-label">Harga Properti (Rp)</label>
+                <input type="number" id="kpr-price" class="form-input" placeholder="Contoh: 500000000">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Uang Muka / DP (%)</label>
+                <input type="number" id="kpr-dp" class="form-input" placeholder="Contoh: 20" value="20">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Suku Bunga per Tahun (%)</label>
+                <input type="number" id="kpr-rate" class="form-input" placeholder="Contoh: 8.5" step="0.1" value="8.5">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tenor (Tahun)</label>
+                <input type="number" id="kpr-tenor" class="form-input" placeholder="Contoh: 15" value="15">
+              </div>
+              <button id="calc-kpr" class="btn-primary w-full mt-4">
+                Hitung Cicilan
+              </button>
+            </div>
+            <!-- Result -->
+            <div id="kpr-result" class="glass-card result-card">
+              <div class="mb-6">
+                <p class="result-label">Cicilan per Bulan</p>
+                <p id="kpr-monthly" class="result-value gradient-text">Rp 0</p>
+              </div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <p class="result-label">Total Pinjaman</p>
+                  <p id="kpr-loan" class="text-lg font-semibold text-white">Rp 0</p>
+                </div>
+                <div>
+                  <p class="result-label">Total Bunga</p>
+                  <p id="kpr-interest" class="text-lg font-semibold text-secondary">Rp 0</p>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="kpr-chart"></canvas>
+              </div>
+              <button id="export-kpr" class="btn-secondary w-full mt-6">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Simpan (PNG)
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Freelance Rate Calculator -->
+        <div id="freelance-content" class="tab-content">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Form -->
+            <div>
+              <h3 class="text-xl font-semibold mb-6">Kalkulator Rate Freelance</h3>
+              <div class="form-group">
+                <label class="form-label">Pengeluaran Bulanan (Rp)</label>
+                <input type="number" id="fl-expense" class="form-input" placeholder="Contoh: 10000000">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Target Tabungan Bulanan (Rp)</label>
+                <input type="number" id="fl-savings" class="form-input" placeholder="Contoh: 5000000">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Jam Kerja Billable per Bulan</label>
+                <input type="number" id="fl-hours" class="form-input" placeholder="Contoh: 120" value="120">
+              </div>
+              <button id="calc-freelance" class="btn-primary w-full mt-4">
+                Hitung Rate
+              </button>
+            </div>
+            <!-- Result -->
+            <div id="freelance-result" class="glass-card result-card">
+              <div class="mb-6">
+                <p class="result-label">Rate per Jam</p>
+                <p id="fl-hourly" class="result-value gradient-text">Rp 0</p>
+              </div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <p class="result-label">Rate per Hari (8 jam)</p>
+                  <p id="fl-daily" class="text-lg font-semibold text-white">Rp 0</p>
+                </div>
+                <div>
+                  <p class="result-label">Target Pendapatan</p>
+                  <p id="fl-target" class="text-lg font-semibold text-secondary">Rp 0</p>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="freelance-chart"></canvas>
+              </div>
+              <button id="export-freelance" class="btn-secondary w-full mt-6">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Simpan (PNG)
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="section-title gradient-text">Projects</h2>
+        <p class="section-subtitle mx-auto">
+          Beberapa karya terbaik yang pernah saya kerjakan
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Project Card 1 - POS Enhanced -->
+        <a href="https://github.com/CalcuDaus/pos-enhanced" target="_blank" class="glass-card project-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop" alt="POS Enhanced">
+          <div class="project-info">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-1 text-xs bg-red-500/20 text-red-400 rounded">Laravel</span>
+              <span class="px-2 py-1 text-xs bg-purple-500/20 text-purple-400 rounded">Blade</span>
+            </div>
+            <h3 class="project-title">POS Enhanced</h3>
+            <p class="project-desc">Sistem Point of Sale modern dengan fitur lengkap untuk manajemen penjualan dan inventory.</p>
+          </div>
+        </a>
+        
+        <!-- Project Card 2 - LMS Gamified -->
+        <a href="https://github.com/CalcuDaus/lms-gamified" target="_blank" class="glass-card project-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=200&fit=crop" alt="LMS Gamified">
+          <div class="project-info">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-1 text-xs bg-red-500/20 text-red-400 rounded">Laravel</span>
+              <span class="px-2 py-1 text-xs bg-green-500/20 text-green-400 rounded">Gamification</span>
+            </div>
+            <h3 class="project-title">LMS Gamified</h3>
+            <p class="project-desc">Learning Management System dengan fitur gamifikasi untuk meningkatkan engagement belajar.</p>
+          </div>
+        </a>
+        
+        <!-- Project Card 3 - Blog System -->
+        <a href="https://github.com/CalcuDaus/blog-system" target="_blank" class="glass-card project-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&h=200&fit=crop" alt="Blog System">
+          <div class="project-info">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded">PHP</span>
+            </div>
+            <h3 class="project-title">Blog System</h3>
+            <p class="project-desc">Sistem blog dengan fitur CRUD lengkap, kategori, dan manajemen konten.</p>
+          </div>
+        </a>
+        
+        <!-- Project Card 4 - HR App -->
+        <a href="https://github.com/CalcuDaus/humanresourceapp" target="_blank" class="glass-card project-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=200&fit=crop" alt="HR App">
+          <div class="project-info">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-1 text-xs bg-red-500/20 text-red-400 rounded">Laravel</span>
+              <span class="px-2 py-1 text-xs bg-purple-500/20 text-purple-400 rounded">Blade</span>
+            </div>
+            <h3 class="project-title">Human Resource App</h3>
+            <p class="project-desc">Aplikasi manajemen SDM untuk tracking karyawan, absensi, dan payroll.</p>
+          </div>
+        </a>
+        
+        <!-- Project Card 5 - SIMPSS -->
+        <a href="https://github.com/CalcuDaus/SIMPSS" target="_blank" class="glass-card project-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" alt="SIMPSS">
+          <div class="project-info">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-1 text-xs bg-indigo-500/20 text-indigo-400 rounded">VB.NET</span>
+            </div>
+            <h3 class="project-title">SIMPSS</h3>
+            <p class="project-desc">Sistem informasi desktop berbasis Visual Basic .NET.</p>
+          </div>
+        </a>
+        
+        <!-- Project Card 6 - Game -->
+        <a href="https://github.com/CalcuDaus/game" target="_blank" class="glass-card project-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=200&fit=crop" alt="Game">
+          <div class="project-info">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-1 text-xs bg-yellow-500/20 text-yellow-400 rounded">JavaScript</span>
+            </div>
+            <h3 class="project-title">Web Game</h3>
+            <p class="project-desc">Game interaktif berbasis web menggunakan JavaScript.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer Section -->
+  <footer id="contact" class="footer py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Contact Info -->
+        <div data-aos="fade-up">
+          <h2 class="section-title gradient-text mb-6">Let's Connect</h2>
+          <p class="text-gray-400 mb-8">
+            Tertarik untuk berkolaborasi atau punya project menarik? 
+            Jangan ragu untuk menghubungi saya.
+          </p>
+          <div class="space-y-4">
+            <a href="mailto:mhdfirdaus.business@gmail.com" class="flex items-center gap-3 text-gray-400 hover:text-primary transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              mhdfirdaus.business@gmail.com
+            </a>
+            <a href="https://github.com/CalcuDaus" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-primary transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              github.com/CalcuDaus
+            </a>
+            <a href="https://www.linkedin.com/in/mhd-firdaus-8a1836211/" class="flex items-center gap-3 text-gray-400 hover:text-primary transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div data-aos="fade-up" data-aos-delay="200">
+          <form id="contact-form" class="glass-card p-6">
+            <div class="form-group">
+              <label class="form-label">Nama</label>
+              <input type="text" class="form-input" placeholder="Nama Anda" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" placeholder="email@anda.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pesan</label>
+              <textarea class="form-input" rows="4" placeholder="Tuliskan pesan Anda..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full">
+              Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Copyright -->
+      <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500">
+        <p>© 2025 Muhammad Firdaus. Crafted with ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- Vanta.js NET -->
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- html2canvas -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Custom Scripts -->
+  <script src="js/three-bg.js"></script>
+  <script src="js/apps/formulas.js"></script>
+  <script src="js/apps/charts-render.js"></script>
+  <script src="js/apps/calculator-controller.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
