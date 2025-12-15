@@ -1,7 +1,11 @@
 /* ========================================
    Developer Playground Portfolio - Styles
-   Cyber/Modern Clean Theme
+   Bento Grid Layout + Dark/Light Theme
    ======================================== */
+
+/* ==========================================
+   THEME SYSTEM
+   ========================================== */
 
 :root {
   /* Primary Colors - Cyber Theme */
@@ -10,10 +14,12 @@
   --color-secondary: #7c3aed;
   --color-accent: #f472b6;
   
-  /* Background Colors */
-  --color-bg-dark: #0a0a0f;
-  --color-bg-card: rgba(15, 15, 25, 0.7);
+  /* Background Colors - Dark Mode (Default) */
+  --color-bg-base: #0a0a0f;
+  --color-bg-card: rgba(255, 255, 255, 0.03);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.06);
   --color-bg-glass: rgba(255, 255, 255, 0.05);
+  --color-bg-elevated: rgba(15, 15, 25, 0.8);
   
   /* Text Colors */
   --color-text-primary: #ffffff;
@@ -21,14 +27,42 @@
   --color-text-muted: #64748b;
   
   /* Border & Effects */
-  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
   --color-glow: rgba(0, 212, 255, 0.3);
   
   /* Spacing */
   --section-padding: 6rem;
+  --bento-gap: 1rem;
+  --border-radius: 1.25rem;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
-/* Base Styles */
+/* Light Theme */
+.light-theme {
+  --color-bg-base: #f0f4f8;
+  --color-bg-card: rgba(255, 255, 255, 0.7);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.9);
+  --color-bg-glass: rgba(255, 255, 255, 0.8);
+  --color-bg-elevated: rgba(255, 255, 255, 0.95);
+  
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.15);
+  --color-glow: rgba(124, 58, 237, 0.2);
+}
+
+/* ==========================================
+   BASE STYLES
+   ========================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -42,11 +76,12 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--color-bg-dark);
+  background-color: var(--color-bg-base);
   color: var(--color-text-primary);
   line-height: 1.6;
   overflow-x: hidden;
   max-width: 100vw;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
 /* Custom Scrollbar */
@@ -55,7 +90,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-dark);
+  background: var(--color-bg-base);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -67,7 +102,10 @@ body {
   background: var(--color-primary);
 }
 
-/* Background Canvas */
+/* ==========================================
+   BACKGROUND
+   ========================================== */
+
 #bg-canvas {
   position: fixed !important;
   top: 0;
@@ -75,34 +113,52 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
+  transition: opacity var(--transition-normal);
 }
 
-/* Glassmorphism Card */
+.light-theme #bg-canvas {
+  opacity: 0.3;
+}
+
+/* ==========================================
+   GLASSMORPHISM & CARDS
+   ========================================== */
+
 .glass-card {
-  background: var(--color-bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--color-bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
-  border-radius: 1rem;
-  transition: all 0.3s ease;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-normal);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-border-hover);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.light-theme .glass-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .glass-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Glow Effects */
 .glow-text {
-  text-shadow: 0 0 20px var(--color-glow),
-               0 0 40px var(--color-glow);
+  text-shadow: 0 0 20px var(--color-glow), 0 0 40px var(--color-glow);
 }
 
 .glow-border {
-  box-shadow: 0 0 20px var(--color-glow),
-              inset 0 0 20px rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 30px var(--color-glow), inset 0 0 30px rgba(0, 212, 255, 0.05);
+}
+
+.light-theme .glow-border {
+  box-shadow: 0 0 30px var(--color-glow);
 }
 
 /* Gradient Text */
@@ -113,7 +169,262 @@ body {
   background-clip: text;
 }
 
-/* Buttons */
+/* Gradient Border */
+.gradient-border {
+  position: relative;
+  background: var(--color-bg-card);
+  border: none;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity var(--transition-normal);
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================
+   BENTO GRID SYSTEM
+   ========================================== */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--bento-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Sizes */
+.bento-item {
+  min-height: 180px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-sm {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.bento-md {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.bento-lg {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 380px;
+}
+
+.bento-wide {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.bento-full {
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+/* Bento Card Styles */
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.bento-card .card-icon {
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bento-card .card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.bento-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+.bento-card .card-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Profile Card (Hero) */
+.profile-card {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.profile-card .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--color-primary);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+  transition: transform var(--transition-normal);
+}
+
+.profile-card:hover .avatar {
+  transform: scale(1.05);
+}
+
+.profile-card .name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.profile-card .title {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.profile-card .bio {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  max-width: 300px;
+}
+
+/* Social Links Card */
+.social-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-glass);
+  border-radius: 0.75rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.social-link:hover {
+  color: var(--color-primary);
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Stats Card */
+.stats-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.stats-card .stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.stats-card .stat-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+/* Tech Card */
+.tech-bento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.tech-bento img {
+  width: 48px;
+  height: 48px;
+  transition: all var(--transition-normal);
+  filter: grayscale(0);
+}
+
+.tech-bento:hover img {
+  transform: scale(1.1);
+}
+
+.tech-bento span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.tech-bento:hover span {
+  color: var(--color-text-primary);
+}
+
+/* Featured Tech (Larger) */
+.tech-featured {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+}
+
+.tech-featured img {
+  width: 64px;
+  height: 64px;
+}
+
+.tech-featured span {
+  font-size: 1rem;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -125,7 +436,7 @@ body {
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   text-decoration: none;
 }
 
@@ -145,7 +456,7 @@ body {
   border: 2px solid var(--color-border);
   border-radius: 0.75rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   text-decoration: none;
 }
 
@@ -154,19 +465,23 @@ body {
   background: rgba(0, 212, 255, 0.1);
 }
 
-/* Navigation */
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
 .nav-glass {
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--color-bg-elevated);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
+  transition: all var(--transition-normal);
 }
 
 .nav-link {
   position: relative;
   color: var(--color-text-secondary);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--transition-fast);
 }
 
 .nav-link:hover {
@@ -180,18 +495,73 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-primary);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  transition: width var(--transition-normal);
 }
 
 .nav-link:hover::after {
   width: 100%;
 }
 
-/* Section Styles */
+/* Theme Toggle */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--color-bg-glass);
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  border: 1px solid var(--color-border);
+}
+
+.theme-toggle:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-primary);
+}
+
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-text-primary);
+  transition: transform var(--transition-normal);
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(15deg);
+}
+
+.theme-toggle .sun-icon {
+  display: none;
+}
+
+.theme-toggle .moon-icon {
+  display: block;
+}
+
+.light-theme .theme-toggle .sun-icon {
+  display: block;
+}
+
+.light-theme .theme-toggle .moon-icon {
+  display: none;
+}
+
+/* ==========================================
+   SECTIONS
+   ========================================== */
+
 section {
   position: relative;
   padding: var(--section-padding) 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .section-title {
@@ -204,31 +574,93 @@ section {
   color: var(--color-text-secondary);
   font-size: 1.125rem;
   max-width: 600px;
+  margin: 0 auto;
 }
 
-/* Tech Stack Cards */
-.tech-card {
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+
+.hero-bento {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+}
+
+/* ==========================================
+   PROJECT CARDS
+   ========================================== */
+
+.project-bento {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.project-bento .project-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+  opacity: 0.3;
+}
+
+.project-bento:hover .project-image {
+  transform: scale(1.1);
+  opacity: 0.4;
+}
+
+.project-bento .project-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   padding: 1.5rem;
-  text-align: center;
 }
 
-.tech-card img {
-  width: 48px;
-  height: 48px;
+.project-bento .project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
-  filter: grayscale(100%) brightness(2);
-  transition: filter 0.3s ease;
 }
 
-.tech-card:hover img {
-  filter: none;
+.project-tag {
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-primary);
 }
 
-/* Tab Navigation */
+.project-bento .project-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.project-bento.bento-lg .project-title {
+  font-size: 2rem;
+}
+
+.project-bento .project-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================
+   TAB NAVIGATION (for Calculator)
+   ========================================== */
+
 .tab-nav {
   display: flex;
   gap: 0.5rem;
@@ -248,7 +680,7 @@ section {
   border-radius: 0.5rem;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .tab-btn:hover {
@@ -270,17 +702,14 @@ section {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Form Inputs */
+/* ==========================================
+   FORM INPUTS
+   ========================================== */
+
 .form-group {
   margin-bottom: 1.25rem;
 }
@@ -296,12 +725,12 @@ section {
 .form-input {
   width: 100%;
   padding: 0.875rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-bg-glass);
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   color: var(--color-text-primary);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .form-input:focus {
@@ -314,7 +743,10 @@ section {
   color: var(--color-text-muted);
 }
 
-/* Result Display */
+/* ==========================================
+   RESULT DISPLAY
+   ========================================== */
+
 .result-card {
   padding: 2rem;
   text-align: center;
@@ -331,52 +763,25 @@ section {
   font-size: 0.875rem;
 }
 
-/* Chart Container */
 .chart-container {
   position: relative;
   height: 250px;
   margin-top: 1.5rem;
 }
 
-/* Project Cards */
-.project-card {
-  overflow: hidden;
-  cursor: pointer;
-}
+/* ==========================================
+   FOOTER
+   ========================================== */
 
-.project-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.project-card:hover img {
-  transform: scale(1.1);
-}
-
-.project-info {
-  padding: 1.5rem;
-}
-
-.project-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.project-desc {
-  color: var(--color-text-secondary);
-  font-size: 0.875rem;
-}
-
-/* Footer */
 .footer {
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-bg-elevated);
   border-top: 1px solid var(--color-border);
 }
 
-/* Mobile Menu */
+/* ==========================================
+   MOBILE MENU
+   ========================================== */
+
 .mobile-menu {
   display: none;
 }
@@ -388,20 +793,67 @@ section {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(10, 10, 15, 0.95);
-  backdrop-filter: blur(12px);
+  background: var(--color-bg-elevated);
+  backdrop-filter: blur(20px);
   padding: 1rem;
   border-bottom: 1px solid var(--color-border);
 }
 
-/* Responsive */
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .bento-lg {
+    grid-column: span 2;
+    grid-row: span 1;
+    min-height: 280px;
+  }
+  
+  .bento-wide {
+    grid-column: span 2;
+  }
+  
+  .bento-full {
+    grid-column: span 2;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --section-padding: 4rem;
+    --bento-gap: 0.75rem;
+  }
+  
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bento-sm, .bento-md, .bento-lg, .bento-wide, .bento-full {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: auto;
+  }
+  
+  .bento-item {
+    min-height: 150px;
   }
   
   .section-title {
     font-size: 2rem;
+  }
+  
+  .profile-card .name {
+    font-size: 1.5rem;
+  }
+  
+  .profile-card .avatar {
+    width: 100px;
+    height: 100px;
   }
   
   .result-value {
@@ -409,7 +861,6 @@ section {
     word-break: break-word;
   }
   
-  /* Tab Navigation Mobile */
   .tab-nav {
     flex-direction: column;
     gap: 0.25rem;
@@ -420,48 +871,42 @@ section {
     font-size: 0.875rem;
   }
   
-  /* Form Inputs Mobile */
   .form-input {
     width: 100%;
     min-width: 0;
     padding: 0.75rem;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
   }
   
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  /* Calculator Container Mobile */
   .glass-card.glow-border {
     padding: 1rem;
   }
   
-  /* Result Card Mobile */
   .result-card {
     padding: 1.25rem;
   }
   
-  .result-label {
-    font-size: 0.75rem;
-  }
-  
-  /* Chart Container Mobile */
   .chart-container {
     height: 200px;
     margin-top: 1rem;
   }
   
-  /* Grid adjustments for calculator */
-  .grid.md\\:grid-cols-2 {
-    grid-template-columns: 1fr;
+  .project-bento .project-title {
+    font-size: 1.25rem;
+  }
+  
+  .project-bento.bento-lg .project-title {
+    font-size: 1.5rem;
   }
 }
 
-/* AOS Custom */
+/* ==========================================
+   ANIMATIONS & UTILITIES
+   ========================================== */
+
 [data-aos] {
   pointer-events: none;
 }
@@ -470,7 +915,6 @@ section {
   pointer-events: auto;
 }
 
-/* Loading Animation */
 .loader {
   width: 40px;
   height: 40px;
@@ -481,7 +925,39 @@ section {
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
+}
+
+/* Shimmer effect for cards */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* Pulse animation for icons */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
